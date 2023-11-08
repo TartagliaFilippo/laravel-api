@@ -17,10 +17,11 @@
             </div>
             <a href="{{ $project->url }}">Link "{{ $project->title }}"</a>
             <p class="card-text">{{ $project->content }}</p>
+            <div class="card-footer text-body-secondary">
+                Utima modifica: {{ $project->updated_at }}
+            </div>
         </div>
-        <div class="card-footer text-body-secondary">
-            Utima modifica: {{ $project->updated_at }}
-        </div>
+
     </div>
     </div>
 @endsection
