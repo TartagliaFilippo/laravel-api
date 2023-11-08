@@ -129,7 +129,7 @@
             coverImagePreview.src = "https://placehold.co/400"
         }
 
-        inputFileElement.addEventListener('chaneg', function() {
+        inputFileElement.addEventListener('change', function() {
             const [file] = this.files;
             coverImagePreview.src = URL.createObjectURL(file);
         })
