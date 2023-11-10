@@ -18,3 +18,4 @@ use App\Http\Controllers\Api\ProjectController;
 */
 
 Route::apiResource("projects", ProjectController::class)->only(['index', 'show']);
+Route::get('/portfolio-filter-type/{type_id}', [ProjectController::class, 'portfolioFilterType']);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Type;
 use App\Models\Project;
 use Illuminate\Http\Request;
 
@@ -22,16 +23,6 @@ class ProjectController extends Controller
         return response()->json(["projects" => $project]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * *@return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
@@ -49,26 +40,22 @@ class ProjectController extends Controller
         return response()->json($project);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * *@return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function portfolioFilterType($type_id)
     {
-        //
-    }
+        $type = Type::select('id', 'label', 'color')
+            ->where('id', $type_id)
+            ->first();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * *@return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        if (!$type)
+            abort(404, 'Nessuna tipologia trovata');
+
+
+        $projects = Project::select('id', 'type_id', 'title', 'url', 'content', 'slug', )
+            ->where('type_id', $type_id)
+            ->with('type:id,label,color', 'technologies:id,label,color')
+            ->orderByDesc('id')
+            ->paginate(12);
+
+        return response()->json(["type" => $type, "projects" => $projects,]);
     }
 }

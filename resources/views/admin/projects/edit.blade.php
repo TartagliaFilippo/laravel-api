@@ -87,7 +87,7 @@
                     <div class="col-4 position-relative">
                         @if ($project->cover_image)
                             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                <i class="fa-solid fa-trash"></i>
+                                <i class="fa-solid fa-trash" id="delete-image-button"></i>
                                 <span class="visually-hidden">unread messages</span>
                             </span>
                         @endif
